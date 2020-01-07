@@ -5,13 +5,12 @@
 */
 
 #include "EEPROM.h"
+#include "Arduino.h"
 #include "StorageIO.h"
-#include  <string.h>
 
 
 StorageIO::StorageIO(const int SIZE){
   position = 0;
-  Serial.println(position);
   EEPROM.begin(SIZE);
 }
 

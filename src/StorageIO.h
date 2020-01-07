@@ -7,8 +7,8 @@
 #ifndef StorageIO_h
 #define StorageIO_h
 
-#include<string.h>
-#include<EEPROM.h>
+#include <Arduino.h>
+#include <EEPROM.h>
 
 class StorageIO{
 private:
