@@ -1,15 +1,13 @@
-#define DEFAULT_SIZE_OF_EEPROM 512
+/*
+  StorageIO.cpp - Library for storing data in ESP8266's EEPROM easily.
+  Created by Zeeshan Iqbal, January 6, 2020.
+  Released into the public domain.
+*/
 
-class StorageIO{
-private:
-  int position;
-public:
-  StorageIO();
-  StorageIO(const int SIZE);
-  void reposition(){this->position = 0;}
-  char * readNextString();
-  void writeNextString(String s);
-};
+#include "EEPROM.h"
+#include "StorageIO.h"
+
+
 
 StorageIO::StorageIO(const int SIZE){
   Serial.println("Here");
@@ -17,23 +15,22 @@ StorageIO::StorageIO(const int SIZE){
   Serial.println(position);
   EEPROM.begin(SIZE);
 }
+
+
 StorageIO::StorageIO(){
   EEPROM.begin(DEFAULT_SIZE_OF_EEPROM);
   position = 0;
 }
+
 
 char * StorageIO::readNextString(){
 
   int i = 0;
   char c;
 
-  
   while(true){
     c = EEPROM.read(i + position);
-     
-    if(c == NULL)
-      break;
-    
+    if (c == 0) break;
     i++;
   }
   
@@ -46,12 +43,12 @@ char * StorageIO::readNextString(){
   return data;
 }
 
+
 void StorageIO::writeNextString(String s){
 
-  for (int i = 0; i < s.length(); i++){
-   EEPROM.write(position++, s[i]);
-  }
-  EEPROM.write(position++, NULL);
+  for (int i = 0; i < s.length(); i++)
+    EEPROM.write(position++, s[i]);
   
+  EEPROM.write(position++, 0);
   EEPROM.commit();
 }
