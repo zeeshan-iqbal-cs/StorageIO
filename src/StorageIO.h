@@ -7,7 +7,7 @@
 #ifndef StorageIO_h
 #define StorageIO_h
 
-#include<String.h>
+#include<string.h>
 #include<EEPROM.h>
 
 class StorageIO{

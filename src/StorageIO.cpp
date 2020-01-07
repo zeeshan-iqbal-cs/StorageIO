@@ -6,7 +6,7 @@
 
 #include "EEPROM.h"
 #include "StorageIO.h"
-#include  <String.h>
+#include  <string.h>
 
 
 StorageIO::StorageIO(const int SIZE){
