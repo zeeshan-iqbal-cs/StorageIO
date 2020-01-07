@@ -6,11 +6,10 @@
 
 #include "EEPROM.h"
 #include "StorageIO.h"
-
+#include  <String.h>
 
 
 StorageIO::StorageIO(const int SIZE){
-  Serial.println("Here");
   position = 0;
   Serial.println(position);
   EEPROM.begin(SIZE);
