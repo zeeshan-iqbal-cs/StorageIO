@@ -21,6 +21,16 @@ StorageIO::StorageIO(){
 }
 
 
+void StorageIO::clear(){
+  position = 0;
+
+  for (int i = 0; i < SIZE; i++)
+    EEPROM.write(i, 0);
+  
+  EEPROM.commit();
+}
+
+
 char * StorageIO::readNextString(){
 
   int i = 0;

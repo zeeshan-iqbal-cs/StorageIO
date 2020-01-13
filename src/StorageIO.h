@@ -17,7 +17,11 @@ private:
 public:
   StorageIO();
   StorageIO(const int SIZE);
+
   void reposition(){this->position = 0;}
+
+  void clear();
+  
   char * readNextString();
   void writeNextString(String s);
 };

@@ -2,3 +2,4 @@ StorageIO	KEYWORD1
 readNextSting	KEYWORD2
 wirteNextString	KEYWORD2
 reposition	KEYWORD2
+clear	KEYWORD2
