@@ -14,15 +14,15 @@ class StorageIO{
 private:
   int static const DEFAULT_SIZE_OF_EEPROM = 512;
   int position;
+  int size;
 public:
-  StorageIO();
-  StorageIO(const int SIZE);
 
+  void begin(const int SIZE = 512);
   void reposition(){this->position = 0;}
 
   void clear();
-  
-  char * readNextString();
+
+  String readNextString();
   void writeNextString(String s);
 };
 #endif

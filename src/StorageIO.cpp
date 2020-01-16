@@ -9,44 +9,37 @@
 #include "StorageIO.h"
 
 
-StorageIO::StorageIO(const int SIZE){
+void StorageIO::begin(const int SIZE){
   position = 0;
+  size = SIZE;
   EEPROM.begin(SIZE);
-}
-
-
-StorageIO::StorageIO(){
-  EEPROM.begin(DEFAULT_SIZE_OF_EEPROM);
-  position = 0;
 }
 
 
 void StorageIO::clear(){
   position = 0;
 
-  for (int i = 0; i < DEFAULT_SIZE_OF_EEPROM; i++)
+  for (int i = 0; i < size; i++){
+    delay(100);
     EEPROM.write(i, 0);
+  }
 
   EEPROM.commit();
 }
 
 
-char * StorageIO::readNextString(){
-
-  int i = 0;
-  char c;
-
-  while(true){
-    c = EEPROM.read(i + position);
-    if (c == 0) break;
-    i++;
+String StorageIO::readNextString(){
+  String data;
+  char tempC = 's';
+  while (true){
+    if (tempC == 0)
+      break;
+    if (position >= size)
+      break;
+    tempC = EEPROM.read(position++);
+    data += tempC;
+    delay(100);
   }
-
-  char * data = new char[i + 1];
-
-  for(int j = 0; j <= i; j++)        // Read string including NULL
-    data[j] = EEPROM.read(position++);
-
   // After that iterator will be standing after NULL
   return data;
 }
