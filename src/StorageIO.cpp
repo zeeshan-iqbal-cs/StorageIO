@@ -24,9 +24,9 @@ StorageIO::StorageIO(){
 void StorageIO::clear(){
   position = 0;
 
-  for (int i = 0; i < SIZE; i++)
+  for (int i = 0; i < DEFAULT_SIZE_OF_EEPROM; i++)
     EEPROM.write(i, 0);
-  
+
   EEPROM.commit();
 }
 
@@ -41,9 +41,9 @@ char * StorageIO::readNextString(){
     if (c == 0) break;
     i++;
   }
-  
+
   char * data = new char[i + 1];
-  
+
   for(int j = 0; j <= i; j++)        // Read string including NULL
     data[j] = EEPROM.read(position++);
 
@@ -56,7 +56,7 @@ void StorageIO::writeNextString(String s){
 
   for (int i = 0; i < s.length(); i++)
     EEPROM.write(position++, s[i]);
-  
+
   EEPROM.write(position++, 0);
   EEPROM.commit();
 }
