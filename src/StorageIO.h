@@ -12,17 +12,23 @@
 
 class StorageIO{
 private:
+  bool debug;
   int static const DEFAULT_SIZE_OF_EEPROM = 512;
   int position;
   int size;
 public:
 
-  void begin(const int SIZE = 512);
+  void begin(const int SIZE = 512, bool debugFlag = false);
   void reposition(){this->position = 0;}
 
   void clear();
 
   String readNextString();
-  void writeNextString(String s);
+  void writeNextString(String s, bool commit = true);
+  void commit() {
+    if (this->debug)
+      Serial.println("Comitting changes on EEPROM");
+    EEPROM.commit();
+  }
 };
 #endif

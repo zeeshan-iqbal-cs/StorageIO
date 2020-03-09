@@ -9,7 +9,9 @@
 #include "StorageIO.h"
 
 
-void StorageIO::begin(const int SIZE){
+void StorageIO::begin(const int SIZE, bool debugFlag){
+  this->debug = debugFlag;
+
   position = 0;
   size = SIZE;
   EEPROM.begin(SIZE);
@@ -45,11 +47,16 @@ String StorageIO::readNextString(){
 }
 
 
-void StorageIO::writeNextString(String s){
+void StorageIO::writeNextString(String s, bool commit){
 
   for (int i = 0; i < s.length(); i++)
     EEPROM.write(position++, s[i]);
 
   EEPROM.write(position++, 0);
-  EEPROM.commit();
+
+  if (commit){
+    if (this->debug)
+      Serial.println("Commiting the changes on storage");
+    this->commit();
+  }
 }

@@ -10,11 +10,6 @@ void setup(){
     StorageIO rom;
     rom.begin();
 
-    // Writing Strings
-    rom.reposition();           // move to start of EEPROM
-    rom.writeNextString("Hello ");
-    rom.writeNextString("World");
-
     // Reading data
     rom.reposition();
     String hello = rom.readNextString();

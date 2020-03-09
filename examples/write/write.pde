@@ -14,17 +14,6 @@ void setup(){
     rom.reposition();           // move to start of EEPROM
     rom.writeNextString("Hello ");
     rom.writeNextString("World");
-
-    // Reading data
-    rom.reposition();
-    String hello = rom.readNextString();
-    String world = rom.readreadNextString();
-
-
-    // Print the data on the Serial console
-    Serial.print(hello);
-    Serial.println(world);
-    Serial.println("End");
 }
 
 void loop(){}
