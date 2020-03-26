@@ -34,12 +34,17 @@ String StorageIO::readNextString(){
   String data;
   char tempC = 's';
   while (true){
-    if (tempC == 0)
-      break;
+    
     if (position >= size)
       break;
+    
     tempC = EEPROM.read(position++);
+    
+    if (tempC == 0)
+      break;
+    
     data += tempC;
+    
     delay(100);
   }
   // After that iterator will be standing after NULL

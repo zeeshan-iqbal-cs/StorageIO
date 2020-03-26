@@ -29,6 +29,8 @@ public:
     if (this->debug)
       Serial.println("Comitting changes on EEPROM");
     EEPROM.commit();
+    
+    delay(2000);
   }
 };
 #endif
